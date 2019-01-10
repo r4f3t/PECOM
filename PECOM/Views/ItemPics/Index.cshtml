@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PECOM.ITEMImages>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "ItemPics", new { itemId=Request.QueryString["itemId"]}, FormMethod.Post,
+                              new { enctype = "multipart/form-data" }))
+{
+    <table class="table">
+        <tr>
+            <td>
+                <input type="file" name="file" />
+            </td>
+            <td>
+                <input type="text" name="ImgName" />
+            </td>
+            <td>
+                <input type="submit" value="Ekle" />
+            </td>
+        </tr>
+    </table>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImgPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImgName)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImgPath)
+            </td>
+            <td>
+                <img src="~/Images/@item.ImgName" width="300" height="300" />
+                
+            </td>
+            <td>
+            
+                @Html.ActionLink("Sil", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -8,10 +8,27 @@ namespace PECOM.Controllers.Admin
 {
     public class ItemPicsController : Controller
     {
+        PECOMEntities db = new PECOMEntities();
         // GET: ItemPics
-        public ActionResult Index()
+        public ActionResult Index(int itemId)
         {
-            return View();
+            var model = db.ITEMImages.Where(x => x.ItemId == itemId).ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(int itemId, ITEMImages collection, HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                file.SaveAs(HttpContext.Server.MapPath("~/Images/")
+                                                      + file.FileName);
+                collection.ImgName = file.FileName;
+            }
+
+            db.ITEMImages.Add(collection);
+            db.SaveChanges();
+            return RedirectToAction("Index", "ItemPics", new { itemId = itemId });
         }
 
         // GET: ItemPics/Details/5
@@ -28,7 +45,7 @@ namespace PECOM.Controllers.Admin
 
         // POST: ItemPics/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ITEMImages collection)
         {
             try
             {
@@ -67,7 +84,8 @@ namespace PECOM.Controllers.Admin
         // GET: ItemPics/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var model = db.ITEMImages.Find(id);
+            return View(model);
         }
 
         // POST: ItemPics/Delete/5
@@ -76,9 +94,11 @@ namespace PECOM.Controllers.Admin
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var model = db.ITEMImages.Find(id);
+                int? _itemId = model.ItemId;
+                db.ITEMImages.Remove(model);
+                db.SaveChanges();
+                return RedirectToAction("Index","ItemPics",new { itemId=_itemId});
             }
             catch
             {
