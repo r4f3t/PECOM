@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PECOMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ITEMImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemId" Type="int" />
+          <Property Name="ImgPath" Type="nvarchar" MaxLength="150" />
+          <Property Name="ImgName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ImgOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="ITEMS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="QuantityPerUnit" Type="nvarchar" MaxLength="20" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="UnitsInStock" Type="smallint" />
+          <Property Name="UnitsOnOrder" Type="smallint" />
+          <Property Name="ReorderLevel" Type="smallint" />
+          <Property Name="Discontinued" Type="bit" Nullable="false" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="40" />
+          <Property Name="ProductClass" Type="nvarchar" MaxLength="40" />
+          <Property Name="SPECODE" Type="nvarchar" MaxLength="40" />
+          <Property Name="SPECODE1" Type="nvarchar" MaxLength="40" />
+          <Property Name="SPECODE2" Type="nvarchar" MaxLength="40" />
+          <Property Name="SPECODE3" Type="nvarchar" MaxLength="40" />
+          <Property Name="EXP" Type="nvarchar" MaxLength="40" />
+          <Property Name="EXP1" Type="nvarchar" MaxLength="40" />
+          <Property Name="EXP2" Type="nvarchar" MaxLength="40" />
+          <Property Name="EXP3" Type="nvarchar" MaxLength="40" />
+          <Property Name="ADDDATE" Type="datetime" />
+          <Property Name="EDITDATE" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_ITEMImages_ITEMS">
+          <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+          <End Role="ITEMImages" Type="Self.ITEMImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEMImages">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PECOMModelStoreContainer">
+          <EntitySet Name="ITEMImages" EntityType="Self.ITEMImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEMS" EntityType="Self.ITEMS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ITEMImages_ITEMS" Association="Self.FK_ITEMImages_ITEMS">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="ITEMImages" EntitySet="ITEMImages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PECOMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ITEMS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="QuantityPerUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="UnitsInStock" Type="Int16" />
+          <Property Name="UnitsOnOrder" Type="Int16" />
+          <Property Name="ReorderLevel" Type="Int16" />
+          <Property Name="Discontinued" Type="Boolean" Nullable="false" />
+          <Property Name="ProductCode" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ProductClass" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SPECODE" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SPECODE1" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SPECODE2" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SPECODE3" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EXP" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EXP1" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EXP2" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EXP3" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ADDDATE" Type="DateTime" Precision="3" />
+          <Property Name="EDITDATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ITEMImages" Relationship="PECOMModel.FK_ITEMImages_ITEMS" FromRole="ITEMS" ToRole="ITEMImages" />
+        </EntityType>
+        <EntityContainer Name="PECOMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ITEMS" EntityType="Self.ITEMS" />
+          <EntitySet Name="ITEMImages" EntityType="PECOMModel.ITEMImages" />
+          <AssociationSet Name="FK_ITEMImages_ITEMS" Association="PECOMModel.FK_ITEMImages_ITEMS">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="ITEMImages" EntitySet="ITEMImages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ITEMImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="Int32" />
+          <Property Name="ImgPath" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ImgName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ImgOrder" Type="Int32" />
+          <NavigationProperty Name="ITEMS" Relationship="PECOMModel.FK_ITEMImages_ITEMS" FromRole="ITEMImages" ToRole="ITEMS" />
+        </EntityType>
+        <Association Name="FK_ITEMImages_ITEMS">
+          <End Type="PECOMModel.ITEMS" Role="ITEMS" Multiplicity="0..1" />
+          <End Type="PECOMModel.ITEMImages" Role="ITEMImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ITEMImages">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PECOMModelStoreContainer" CdmEntityContainer="PECOMEntities">
+          <EntitySetMapping Name="ITEMS">
+            <EntityTypeMapping TypeName="PECOMModel.ITEMS">
+              <MappingFragment StoreEntitySet="ITEMS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="QuantityPerUnit" ColumnName="QuantityPerUnit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductClass" ColumnName="ProductClass" />
+                <ScalarProperty Name="SPECODE" ColumnName="SPECODE" />
+                <ScalarProperty Name="SPECODE1" ColumnName="SPECODE1" />
+                <ScalarProperty Name="SPECODE2" ColumnName="SPECODE2" />
+                <ScalarProperty Name="SPECODE3" ColumnName="SPECODE3" />
+                <ScalarProperty Name="EXP" ColumnName="EXP" />
+                <ScalarProperty Name="EXP1" ColumnName="EXP1" />
+                <ScalarProperty Name="EXP2" ColumnName="EXP2" />
+                <ScalarProperty Name="EXP3" ColumnName="EXP3" />
+                <ScalarProperty Name="ADDDATE" ColumnName="ADDDATE" />
+                <ScalarProperty Name="EDITDATE" ColumnName="EDITDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMImages">
+            <EntityTypeMapping TypeName="PECOMModel.ITEMImages">
+              <MappingFragment StoreEntitySet="ITEMImages">
+                <ScalarProperty Name="ImgOrder" ColumnName="ImgOrder" />
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

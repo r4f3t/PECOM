@@ -1,0 +1,68 @@
+﻿@model IEnumerable<PECOM.ITEMS>
+
+@{
+    ViewBag.Title = "Ürün Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Listem</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SPECODE)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.EXP)
+        </th>      
+        <th>
+            @Html.DisplayNameFor(model => model.EDITDATE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductClass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SPECODE)
+        </td>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.EXP)
+        </td> 
+        <td>
+            @Html.DisplayFor(modelItem => item.EDITDATE)
+        </td>
+        <td>
+          
+            @Html.ActionLink("İçerik", "Edit", new { id=item.ID}) |
+            @Html.ActionLink("Sil", "Delete", new {  id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
